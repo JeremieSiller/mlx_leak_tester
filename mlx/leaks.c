@@ -10,6 +10,7 @@ typedef struct s_leaks {
 
 static t_leaks	*head;
 static int		not_need;
+static int		protect;
 
 static void	remove_node(void *addr)
 {
@@ -65,18 +66,22 @@ static void	showLeaks(void)
 
 	while (rot)
 	{
-		printf("[KO]: %s at:%p has not been destroyed\n", rot->what, rot->addr);
+		printf("\033[0;31m[KO]\033[0;37m: \033[0;36m%s\033[0;37m at:\033[0;36m%p \033[0;37mhas not been destroyed\n", rot->what, rot->addr);
 		rot = rot->next;
 	}
 	if (not_need > 0)
-		printf("[WARNING]: you have destroyed %i uninitialized mlx_pointers\n", not_need);
+		printf("[WARNING]: you have destroyed %i uninitialized mlx_pointer(s)\n", not_need);
 }
 
 void	*_mlx_init_(void)
 {
 	head = 0;
 	not_need = 0;
+	protect = 0;
 	atexit(&showLeaks);
+	if (protect == PROTECT_VALUE)
+		return (NULL);
+	protect++;
 	return (mlx_init());
 }
 
@@ -84,9 +89,12 @@ void	*_mlx_new_window_(void *mlx_ptr, int size_x, int size_y, char *title)
 {
 	void	*addr;
 
+	if (protect == PROTECT_VALUE)
+		return (NULL);
 	addr = mlx_new_window(mlx_ptr, size_x, size_y, title);
 	if (!addr)
 		return (addr);
+	protect++;
 	if (add_node(addr, "window"))
 		return (NULL);
 	return (addr);
@@ -96,9 +104,12 @@ void	*_mlx_new_image_(void *mlx_ptr,int width,int height)
 {
 	void	*addr;
 
+	if (protect == PROTECT_VALUE)
+		return (NULL);
 	addr = mlx_new_image(mlx_ptr, width, height);
 	if (!addr)
 		return (addr);
+	protect++;
 	if (add_node(addr, "image"))
 		return (NULL);
 	return (addr);
@@ -109,9 +120,12 @@ void	*_mlx_xpm_to_image_(void *mlx_ptr, char **xpm_data,
 {
 	void	*addr;
 
+	if (protect == PROTECT_VALUE)
+		return (NULL);
 	addr = mlx_xpm_to_image(mlx_ptr, xpm_data, width, height);
 	if (!addr)
 		return (addr);
+	protect++;
 	if (add_node(addr, "xpm_image"))
 		return (NULL);
 	return (addr);
@@ -122,9 +136,12 @@ void	*_mlx_xpm_file_to_image_(void *mlx_ptr, char *filename,
 {
 	void	*addr;
 
+	if (protect == PROTECT_VALUE)
+		return (NULL);
 	addr = mlx_xpm_file_to_image(mlx_ptr, filename, width, height);
 	if (!addr)
 		return (addr);
+	protect++;
 	if (add_node(addr, "xpm_image"))
 		return (NULL);
 	return (addr);

@@ -47,6 +47,10 @@
 #define	MLX_LEAKS_H
 
 
+#ifndef PROTECT_VALUE
+# define PROTECT_VALUE -1
+#endif
+
 void	*mlx_init();
 void	*_mlx_init_();
 

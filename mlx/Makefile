@@ -8,6 +8,7 @@ OBJ1=$(SRC:.c=.o)
 OBJ=$(OBJ1:.m=.o)
 CFLAGS+=-O2
 CFLAGS+=-w
+CFLAGS+= -D PROTECT_VALUE=$(PROTECT_VALUE)
 COUNT=0
 # add to match string put with X11 in size and position
 CFLAGS+= -DSTRINGPUTX11
@@ -23,11 +24,11 @@ CUT = "\033[K"
 COUNT_SRC := 9
 
 %.o : %.c
+	@tput civis;
 	@if [ $(COUNT) -eq 0 ] ; then\
 		printf $(Y)"Compiling $(NOM):\n";\
 		fi;
-	@cc -O2 -w -DSTRINGPUTX11 -c -o $@ $<
-	@tput civis;
+	@cc $(CFLAGS) -DSTRINGPUTX11 -c -o $@ $< || tput cnorm
 	@$(eval COUNT := $(shell ls -R | grep -E "\.o" | wc -w))
 	@$(eval COUNT := $(shell echo $$(($(COUNT)+1))))
 	@if [ $(COUNT) -ne $$(($(COUNT_SRC) + 1)) ]; then\
@@ -54,14 +55,13 @@ COUNT_SRC := 9
 	else \
 		printf $(G)"▇"; \
 	fi
-	@tput cnorm
 
 %.o : %.m
 	@tput civis;
 	@if [ $(COUNT) -eq 0 ] ; then\
 		printf $(Y)"Compiling $(NOM):\n";\
 		fi;
-	@cc -O2 -w -DSTRINGPUTX11 -c -o $@ $<
+	@cc $(CFLAGS) -DSTRINGPUTX11 -c -o $@ $< || tput cnorm
 	@$(eval COUNT := $(shell ls -R | grep -E "\.o" | wc -w))
 	@$(eval COUNT := $(shell echo $$(($(COUNT)+1))))
 	@printf "\r"; \
