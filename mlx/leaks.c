@@ -1,3 +1,10 @@
+// leaks.c
+// Copyright (c) jsiller (jsiller@student.42heilbronn.de)
+// This file is part of mlx_leak_tester (based on mlx by Ecole 42),
+// forked at 12th of November 2021
+// See LICENSE file for more details about the conditions this file is released under.
+// file added by jsiller, not in original mlx
+
 #include "mlx_leaks.h"
 #include <stdlib.h>
 

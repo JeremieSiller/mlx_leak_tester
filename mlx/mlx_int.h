@@ -6,6 +6,11 @@
 // include opengl needed before mlx_int.h
 //
 
+// Copyright (c) jsiller (jsiller@student.42heilbronn.de)
+// This file is part of mlx_leak_tester (based on mlx by Ecole 42),
+// forked at 12th of November 2021
+// See LICENSE file for more details about the conditions this file is released under.
+// original file from mlx
 
 #define	MAX_EVENT	32
 #define MAX_PIXEL_NB	200000

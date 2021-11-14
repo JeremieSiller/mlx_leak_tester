@@ -8,6 +8,13 @@
 ** Last update Tue Oct 01 16:23:28 2014 Olivier Crouzet
 */
 
+// mlx_leaks.h
+// Copyright (c) jsiller (jsiller@student.42heilbronn.de)
+// This file is part of mlx_leak_tester (based on mlx by Ecole 42),
+// forked at 12th of November 2021
+// See LICENSE file for more details about the conditions this file is released under.
+// file from mlx and edited by jsiller
+
 /*
 **   MinilibX -  Please report bugs
 */

@@ -1,6 +1,12 @@
 // mlx xpm
 // by ol
 
+// Copyright (c) jsiller (jsiller@student.42heilbronn.de)
+// This file is part of mlx_leak_tester (based on mlx by Ecole 42),
+// forked at 12th of November 2021
+// See LICENSE file for more details about the conditions this file is released under.
+// original file from mlx
+
 #include <OpenGL/gl3.h>
 #include <stdlib.h>
 #include <stdio.h>

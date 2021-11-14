@@ -1,5 +1,9 @@
-#
-#
+# Makefile
+# Copyright (c) jsiller (jsiller@student.42heilbronn.de)
+# This file is part of mlx_leak_tester (based on mlx by Ecole 42),
+# forked at 12th of November 2021
+# See LICENSE file for more details about the conditions this file is released under.
+# file from mlx and edited by jsiller
 
 NOM=libmlx.a
 SRC= mlx_shaders.c mlx_new_window.m mlx_init_loop.m mlx_new_image.m mlx_xpm.c mlx_int_str_to_wordtab.c leaks.c
@@ -8,7 +12,9 @@ OBJ1=$(SRC:.c=.o)
 OBJ=$(OBJ1:.m=.o)
 CFLAGS+=-O2
 CFLAGS+=-w
+ifeq ($(PROTECT_VALUE), undefined)
 CFLAGS+= -D PROTECT_VALUE=$(PROTECT_VALUE)
+endif
 COUNT=0
 # add to match string put with X11 in size and position
 CFLAGS+= -DSTRINGPUTX11
