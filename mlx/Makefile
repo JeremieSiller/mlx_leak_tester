@@ -12,7 +12,7 @@ OBJ1=$(SRC:.c=.o)
 OBJ=$(OBJ1:.m=.o)
 CFLAGS+=-O2
 CFLAGS+=-w
-ifeq ($(PROTECT_VALUE), undefined)
+ifdef PROTECT_VALUE
 CFLAGS+= -D PROTECT_VALUE=$(PROTECT_VALUE)
 endif
 COUNT=0
