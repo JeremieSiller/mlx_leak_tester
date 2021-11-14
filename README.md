@@ -4,10 +4,10 @@ A small add-on for the mlx-library which lets you know if you destroyed all imag
 
 ## Table of contents
 1. [About](#about)
-2. [How to use](#howtouse)
-3. [Leaks](#leaks)
-4. [Protection](#protection)
-5. [MLX](#mlx)
+2. [MLX](#mlx)
+3. [How to use](#howtouse)
+4. [Leaks](#leaks)
+5. [Protection](#protection)
 
 
 ## About
@@ -24,6 +24,12 @@ Instead of calling the real mlx-functions it will call a function wich will save
 then calls the real function you actually wanted to call. When destroying the image/window it will call a function which will remove
 the pointer from the list and then calls the real mlx-destroy function.
 At exit it will loop through the list and prints all pointers that are still left and therefore have not been freed/destroyed.
+
+## MLX
+
+This project is an adjustment to the mlx-library you can find it here:
+https://github.com/42Paris/minilibx-linux
+
 
 ## How to use
 
@@ -56,7 +62,3 @@ replace X with the number of the protection you want to check (0 being the first
 What does this mean? :
 if you compile with a PROTECTION_VALUE >= 0 it means that the library is gonna return NULL on the
 PROTECTION_VALUE-th call of a mlx-create function.
-
-## MLX
-This project is an adjustment to the mlx-library you can find it here:
-https://github.com/42Paris/minilibx-linux
