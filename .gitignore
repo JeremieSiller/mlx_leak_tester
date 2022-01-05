@@ -1,3 +1,4 @@
 libmlx.a
 *.o
 test.c
+a.out

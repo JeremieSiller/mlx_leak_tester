@@ -67,6 +67,8 @@ void	*_mlx_init_();
 */
 
 
+void	mlx_destroy(void *mlx_ptr);
+
 /*
 ** Basic actions
 */
