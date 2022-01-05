@@ -10,11 +10,11 @@
 
 #include "mlx_leaks.h"
 # define mlx_init() _mlx_init_()
-# define mlx_new_window(a, b, c, d) _mlx_new_window_(a, b, c, d)
-# define mlx_new_image(a, b, c) _mlx_new_image_(a, b, c)
-# define mlx_xpm_to_image(a, b, c ,d) _mlx_xpm_to_image_(a, b, c ,d)
-# define mlx_xpm_file_to_image(a, b, c ,d) _mlx_xpm_file_to_image_(a, b, c ,d)
+# define mlx_new_window(mlx_ptr, size_x, size_y, title) _mlx_new_window_(mlx_ptr, size_x, size_y, title)
+# define mlx_new_image(mlx_ptr, width, height) _mlx_new_image_(mlx_ptr, width, height)
+# define mlx_xpm_to_image(mlx_ptr, xpm_data, width , heigth) _mlx_xpm_to_image_(mlx_ptr, xpm_data, width ,heigth)
+# define mlx_xpm_file_to_image(mlx_ptr, filename, width ,heigth) _mlx_xpm_file_to_image_(mlx_ptr, filename, width ,heigth)
 // # define mlx_png_file_to_image(a, b, c, d) _mlx_png_file_to_image_(a, b, c, d)
-# define mlx_destroy_window(a, b) _mlx_destroy_window_(a, b)
-# define mlx_destroy_image(a, b) _mlx_destroy_image_(a, b)
+# define mlx_destroy_window(mlx_ptr, win_ptr) _mlx_destroy_window_(mlx_ptr, win_ptr)
+# define mlx_destroy_image(mlx_ptr, img_ptr) _mlx_destroy_image_(mlx_ptr, img_ptr)
 #endif
