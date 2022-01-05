@@ -6,7 +6,8 @@
 // file added by jsiller, not in original mlx
 
 #include "mlx_leaks.h"
-#include <stdlib.h>
+#include <stdlib.h>\
+#include <string.h>
 
 typedef struct s_leaks {
 	char			*what;
@@ -73,7 +74,15 @@ static void	showLeaks(void)
 
 	while (rot)
 	{
-		printf("\033[0;31m[KO]\033[0;37m: \033[0;36m%s\033[0;37m at:\033[0;36m%p \033[0;37mhas not been destroyed\n", rot->what, rot->addr);
+		if (!strcmp("mlx_ptr", rot->what))
+		{
+			printf("\033[33m[KO]\033[0;37m: \033[0;36m%s\033[0;37m at:\033[0;36m%p \033[0;37mhas not been destroyed\n\tthe standard mlx library does not a function to fix this leak\n\tbut you can use the mlx_destory function out of this library\n", rot->what, rot->addr);
+		}
+		else
+		{
+			printf("\033[0;31m[KO]\033[0;37m: \033[0;36m%s\033[0;37m at:\033[0;36m%p \033[0;37mhas not been destroyed\n", rot->what, rot->addr);
+		}
+		remove_node(rot->addr);
 		rot = rot->next;
 	}
 	if (not_need > 0)
