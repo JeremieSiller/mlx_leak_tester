@@ -82,6 +82,7 @@ static void	showLeaks(void)
 
 void	*_mlx_init_(void)
 {
+	void *addr;
 	head = 0;
 	not_need = 0;
 	protect = 0;
@@ -89,7 +90,12 @@ void	*_mlx_init_(void)
 	if (protect == PROTECT_VALUE)
 		return (NULL);
 	protect++;
-	return (mlx_init());
+	addr = mlx_init();
+	if (!addr)
+		return (NULL);
+	if (add_node(addr, "mlx_ptr"))
+		return (NULL);
+	return (addr);
 }
 
 void	*_mlx_new_window_(void *mlx_ptr, int size_x, int size_y, char *title)
@@ -176,4 +182,9 @@ int	_mlx_destroy_window_(void *mlx_ptr, void *win_ptr)
 {
 	remove_node(win_ptr);
 	return(mlx_destroy_window(mlx_ptr, win_ptr));
+}
+
+void	_mlx_destroy_(void *mlx_ptr)
+{
+	remove_node(mlx_ptr);
 }

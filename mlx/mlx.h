@@ -17,4 +17,5 @@
 // # define mlx_png_file_to_image(a, b, c, d) _mlx_png_file_to_image_(a, b, c, d)
 # define mlx_destroy_window(mlx_ptr, win_ptr) _mlx_destroy_window_(mlx_ptr, win_ptr)
 # define mlx_destroy_image(mlx_ptr, img_ptr) _mlx_destroy_image_(mlx_ptr, img_ptr)
+# define mlx_destroy(mlx_ptr) _mlx_destroy_(mlx_ptr);
 #endif
