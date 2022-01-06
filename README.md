@@ -22,8 +22,8 @@ The project is techincally not checking for leaks, its more or less counting all
 amount of destroy calls. 
 Instead of calling the real mlx-functions it will call a function wich will save all pointers in a list and
 then calls the real function you actually wanted to call. When destroying the image/window it will call a function which will remove
-the pointer from the list and then calls the real mlx-destroy function.
-At exit it will loop through the list and prints all pointers that are still left and therefore have not been freed/destroyed.
+the pointer from the list and then call the real mlx-destroy function.
+At exit it will loop through the list and print all pointers that are still left and therefore have not been freed/destroyed.
 
 ## MLX
 
@@ -51,6 +51,28 @@ Also if it doesnt print anything at exit, it doesn't mean your project doesn't h
 meaning malloc or similar functions are not getting tracked.
 Always check leaks for yourself and dont rely on this tool.
 
+**mlx_init:**
+
+the mlx_init function allocates memory in a struct, but there is not function to properly free everything mlx_init allocated. If you tried fixing this by
+simply freeing the mlx_ptr, you probably realized that there are still leaks. That is the case because the mlx_ptr is a pointer to a struct which contains a pointer to an allocated image. 
+This library contains a mlx_destroy function to fix this leak. If you don't wanna submit your project with this library, you can copy following code into your mlx_library:
+
+copy the prototype in mlx.h:
+```c
+void	mlx_destroy(void *mlx_ptr);
+```
+copy the function in mlx_init_loop.m:
+```c
+void	mlx_destroy(void *mlx_ptr)
+{
+	mlx_ptr_t	*ptr;
+
+	ptr = mlx_ptr;
+	mlx_destroy_image(ptr, ptr->font);
+	free(ptr);
+}
+```
+
 ## Protection
 
 This is a second feature this library supports. You can check if your protection guards work properly.
@@ -61,4 +83,4 @@ export PROTECTION_VALUE=X; make --directory=PATHTOMLX
 replace X with the number of the protection you want to check (0 being the first).
 What does this mean? :
 if you compile with a PROTECTION_VALUE >= 0 it means that the library is gonna return NULL on the
-PROTECTION_VALUE-th call of a mlx-create function.
+X-th call of a mlx-create function.
