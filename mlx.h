@@ -8,7 +8,7 @@
 #ifndef MLX_H
 #define MLX_H
 
-#include "mlx_leaks.h"
+#include "src/mlx_leaks.h"
 # define mlx_init() _mlx_init_()
 # define mlx_new_window(mlx_ptr, size_x, size_y, title) _mlx_new_window_(mlx_ptr, size_x, size_y, title)
 # define mlx_new_image(mlx_ptr, width, height) _mlx_new_image_(mlx_ptr, width, height)
