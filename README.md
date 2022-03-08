@@ -87,6 +87,7 @@ replace X with the number of the protection you want to check (0 being the first
 What does this mean?
 If you compile with a PROTECTION_VALUE >= 0 it means that the library is gonna return NULL on the
 X-th call of a mlx-create function.
+
 If your code contains something like this:
 ```c
 void	*mlx;
